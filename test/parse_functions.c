@@ -26,11 +26,11 @@ char **parse_line(char *line)
 /**
  *
  */
-char **tokenize_path(void)
+char *path_cmd(char *cmd)
 {
 	char line[] = "/bin:/usr/bin:/usr/local/bin";
 	int position = 0;
-	char *path_line = line;
+	char *path_line = line, *temporal = NULL;
 	char **path_tokens = malloc(sizeof(char *) * 64);
 
 	if (!path_tokens)
@@ -45,26 +45,21 @@ char **tokenize_path(void)
 		path_line = strtok(NULL, ":");
 	}
 	path_tokens[position] = NULL;
-	return (path_tokens);
-}
 
-/**
- * 
- */
-char *path_cmd(char **path_tokens, char *cmd)
-{
-	int position = 0;
-	char *temporal = NULL;
-
+	position = 0;
 	while (path_tokens[position])
 	{
- 		path_tokens[position] = strcat(path_tokens[position], "/");
-		temporal = strcat(path_tokens[position], cmd);
-		printf("%s", path_tokens[position]);
+		path_tokens[position] = _strcat(path_tokens[position], "/");
+		temporal = _strcat(path_tokens[position], cmd);
+		printf("%s\n", path_tokens[position]);
 
 		if (access(temporal, F_OK) == 0)
+		{
+			free(path_tokens);
 			return (temporal);
+		}
 		position++;
 	}
+	free(path_tokens);
 	return (NULL);
 }
