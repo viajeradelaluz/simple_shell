@@ -21,7 +21,7 @@ char *_strcat(char *dest, char *src)
 }
 
 /**
- * 
+ *
  */
 int _strlen(char *string)
 {
@@ -29,6 +29,30 @@ int _strlen(char *string)
 
 	while (string)
 		counter++;
-	
+
 	return (counter);
+}
+
+/**
+ *
+ */
+char *_strcpy(char *arguments, char *if_comand)
+{
+    int size_if_comand = _strlen(if_comand);
+    int counter = 0;
+
+    arguments = malloc(sizeof(char *) * (size_if_comand + 1));
+
+    if (!arguments)
+        return (NULL);
+
+    while (if_comand[counter])
+    {
+        arguments[counter] = if_comand[counter];
+        counter++;
+    }
+    arguments[counter] = if_comand[counter];
+
+	free(arguments);
+    return (arguments);
 }
