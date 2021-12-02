@@ -6,7 +6,7 @@ char **parse_line(char *line)
 {
 	int position = 0;
 	char *token = NULL;
-	char **tokens = malloc(sizeof(char *) * 64);
+	char **tokens = malloc(sizeof(char *) * 1024);
 
 	if (!tokens)
 		return (NULL);
@@ -20,6 +20,8 @@ char **parse_line(char *line)
 		token = strtok(NULL, " \t\r\n\a");
 	}
 	tokens[position] = NULL;
+	free(token);
+
 	return (tokens);
 }
 
@@ -28,15 +30,16 @@ char **parse_line(char *line)
  */
 char *path_cmd(char *cmd)
 {
-	char line[] = "/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin";
+	char path[] = "/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin";
 	int position = 0;
-	char *path_line = line, *temporal = NULL;
-	char **path_tokens = malloc(sizeof(char *) * 64);
+	char *path_line = path, *temporal = NULL;
+	char **path_tokens = malloc(sizeof(char *) * 1024);
 
+	/* Tokenizing the PATH */
 	if (!path_tokens)
 		return (NULL);
 
-	path_line = strtok(line, ":");
+	path_line = strtok(path, ":");
 	while (path_line)
 	{
 		path_tokens[position] = path_line;
@@ -45,7 +48,9 @@ char *path_cmd(char *cmd)
 		path_line = strtok(NULL, ":");
 	}
 	path_tokens[position] = NULL;
+	free(path_line);
 
+	/* Parsing cmd with the PATH */
 	position = 0;
 	while (path_tokens[position])
 	{
