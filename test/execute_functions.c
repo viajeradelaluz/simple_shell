@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * Revisar valgrind, hacer free
+ * 
  */
 int execute(char **arguments)
 {
