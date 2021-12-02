@@ -6,7 +6,7 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)env;
 
-	int terminal = 1, read;
+	int terminal = 1, read = 0;
 	char *line = NULL, *if_command = NULL;
 	char **arguments = NULL;
 	size_t size_line;
@@ -20,14 +20,17 @@ int main(int argc, char **argv, char **env)
 
 	do
 	{
-		/* Read */
 		if (terminal == 1)
 			write(STDOUT_FILENO, "($) ", 4);
 
+		/* Read */
 		fflush(stdin);
 		read = getline(&line, &size_line, stdin);
-		if (!read)
-			return (-1);
+		if (!read || feof(stdin)) /* Check for EOF */
+		{
+			free(line);
+			exit(EXIT_SUCCESS); /* Is EOF */
+		}
 
 		/* Parse and Execute */
 		arguments = parse_line(line);
@@ -40,9 +43,11 @@ int main(int argc, char **argv, char **env)
 
 		execute(arguments);
 
+		free(arguments);
+		free(if_command);
 	} while (1);
 
 	free(line);
-	free(arguments);
+
 	return (0);
 }
