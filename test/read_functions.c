@@ -19,7 +19,9 @@ char *_strcat(char *dest, char *src)
 
 	return (dest);
 }
-
+/**
+ *
+ */
 char *_strconcat(char *str_1, char *str_2)
 {
 	int size_str_1 = _strlen(str_1);
