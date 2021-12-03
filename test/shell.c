@@ -2,25 +2,17 @@
 
 int main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
+	(void)argc, (void)argv, (void)env;
 
-	int terminal = 1, read = 0;
+	int read = 0;
+	int (*f)(char **);
 	char *line = NULL, *if_command = NULL;
 	char **arguments = NULL;
 	size_t size_line;
 
-	/* Check if FD is a terminal */
-	if (!isatty(STDIN_FILENO))
-	{
-		write(STDOUT_FILENO, "Is not a terminal\n", 18);
-		terminal = 0;
-	}
-
 	do
 	{
-		if (terminal == 1)
+		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "($) ", 4);
 
 		/* Read */
@@ -35,16 +27,33 @@ int main(int argc, char **argv, char **env)
 		/* Parse and Execute */
 		arguments = parse_line(line);
 
-		if_command = path_cmd(arguments[0]);
-		if (!if_command)
-			return (-1);
+		if (access(arguments[0], F_OK) != 0) /* Check if input is in PATH */
+		{
+			f = get_builtin(arguments); /* Check if input is a builtin */
+			if (!f)
+			{
+				if_command = path_cmd(arguments[0]); /* Check if input is not a builtin */
+				if (!if_command)
+				{
+					perror("Command not found");
+					free(arguments), free(if_command);
+					continue;
+				}
+				arguments[0] = if_command;
 
-		arguments[0] = if_command;
-
-		execute(arguments);
+				execute(arguments), free(if_command);
+			}
+			else
+			{
+				f(arguments);
+				execute(arguments), f = NULL;
+			}
+		}
+		else
+			execute(arguments);
 
 		free(arguments);
-		free(if_command);
+
 	} while (1);
 
 	free(line);

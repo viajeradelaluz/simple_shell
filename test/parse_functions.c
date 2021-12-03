@@ -44,7 +44,6 @@ char *path_cmd(char *cmd)
 	{
 		path_tokens[position] = path_line;
 		position++;
-
 		path_line = strtok(NULL, ":");
 	}
 	path_tokens[position] = NULL;
@@ -67,7 +66,6 @@ char *path_cmd(char *cmd)
 		free(path_tokens[position]);
 		position++;
 	}
-
 	free(path_tokens);
 	return (NULL);
 }
