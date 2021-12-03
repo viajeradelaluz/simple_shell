@@ -31,6 +31,7 @@ char *path_cmd(char *cmd);
 
 /* execute_functions.c */
 int execute(char **arguments);
+int _atoi(char *s);
 
 /* builtins.c */
 int _cd(char **arguments);
