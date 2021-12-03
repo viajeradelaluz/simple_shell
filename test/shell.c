@@ -44,10 +44,7 @@ int main(int argc, char **argv, char **env)
 				execute(arguments), free(if_command);
 			}
 			else
-			{
-				f(arguments);
-				execute(arguments), f = NULL;
-			}
+				f(arguments), f = NULL;				
 		}
 		else
 			execute(arguments);
