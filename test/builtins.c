@@ -33,7 +33,26 @@ int _help(char **arguments)
  */
 int __exit(char **arguments)
 {
-	(void)arguments;
+	int status = 0;
+	int i;
+
+	if (arguments[1] == NULL)
+	{
+		exit(status);
+	}
+	else
+	{
+		for (i = 0; arguments[1][i]; i++)
+		{
+			if (arguments[1][i] < 48 || arguments[1][i] > 57)
+			{
+				perror("No valid");
+			}
+		}
+
+		status = _atoi(arguments[1]);
+		exit(status);
+	}
 	return (0);
 }
 
