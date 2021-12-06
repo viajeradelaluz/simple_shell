@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * parse_line - Tokenize a line (string) with delimitators.
+ * tokenize_line - Tokenize a line (string) with delimitators.
  * @line: line to tokenize.
  * Return: an array of strings with tokens-line parts.
  */
-char **parse_line(char *line)
+char **tokenize_line(char *line)
 {
 	int position = 0;
 	char *token = NULL;
@@ -14,17 +14,17 @@ char **parse_line(char *line)
 	if (!tokens)
 		return (NULL);
 
-	token = strtok(line, " \t\r\n\a");
+	token = _strtok(line, " \t\r\n\a");
 	while (token)
 	{
 		tokens[position] = token;
 		position++;
 
-		token = strtok(NULL, " \t\r\n\a");
+		token = _strtok(NULL, " \t\r\n\a");
 	}
 	tokens[position] = NULL;
-	free(token);
 
+	free(token);
 	return (tokens);
 }
 
@@ -36,7 +36,7 @@ char **parse_line(char *line)
 char **tokenize_path(void)
 {
 	int position = 0;
-	char *path = _getPATH(), *path_line = path;
+	char *path = _getPATH(), *path_line = NULL;
 	char **path_tokens = malloc(sizeof(char *) * 1024);
 
 	if (!path_tokens)
@@ -45,16 +45,16 @@ char **tokenize_path(void)
 		return (NULL);
 	}
 
-	path_line = strtok(path, ":");
+	path_line = _strtok(path, ":");
 	while (path_line)
 	{
 		path_tokens[position] = path_line;
 		position++;
-		path_line = strtok(NULL, ":");
+		path_line = _strtok(NULL, ":");
 	}
 	path_tokens[position] = NULL;
 
-	free(path_line); /* see for free PATH */
+	free(path_line);
 	return (path_tokens);
 }
 
