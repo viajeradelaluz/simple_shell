@@ -33,13 +33,16 @@ int _atoi(char *s);
 char *_strconcat(char *str_1, char *srt_2);
 char *_strcpy(char *dest, char *src);
 char *_getPATH(void);
+void free_malloc(char *string);
 
 /* parse.c */
-char **parse_line(char *line);
+char **tokenize_line(char *line);
 char **tokenize_path(void);
 char *path_cmd(char *cmd);
 
 /* execute.c */
+char *read_line();
+char **parse_arguments(char *line);
 int execute(char **arguments);
 
 /* builtins.c */
@@ -47,6 +50,12 @@ int(*get_builtin(char **arguments))(char **);
 int _cd(char **arguments);
 int _help(char **arguments);
 int __exit(char **arguments);
-int _env(char **arguments);
+int _env(char **env);
+
+char *_strtok(char *str, char *delim);
+
+/* #define UNUSED(x) (void)(x); */
+#define RAII_VARIABLE() \
 
 #endif /* MAIN_H */
+
