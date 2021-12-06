@@ -8,22 +8,21 @@
  */
 char *_strconcat(char *str_1, char *str_2)
 {
-	int size_str_1 = _strlen(str_1);
-	int size_str_2 = _strlen(str_2);
-	char *p = NULL;
-	char *copy = malloc(sizeof(char *) * (size_str_1 + size_str_2 + 1));
+	int size = _strlen(str_1) + _strlen(str_2) + 1;
+	char *temporal = NULL;
+	char *copy = malloc(sizeof(char *) * size);
 
 	if (!copy)
 		return (NULL);
 
-	p = copy;
+	temporal = copy;
 	while (*str_1)
-		*p++ = *str_1++;
+		*temporal++ = *str_1++;
 
 	while (*str_2)
-		*p++ = *str_2++;
+		*temporal++ = *str_2++;
 
-	*p = '\0';
+	*temporal = '\0';
 
 	return (copy);
 }
@@ -36,11 +35,10 @@ char *_strconcat(char *str_1, char *str_2)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int size_src = _strlen(src);
+	int size = _strlen(src) + 1;
 	int counter = 0;
 
-	dest = malloc(sizeof(char *) * (size_src + 1));
-
+	dest = malloc(sizeof(char *) * size);
 	if (!dest)
 		return (NULL);
 
@@ -62,13 +60,27 @@ char *_strcpy(char *dest, char *src)
 char *_getPATH(void)
 {
 	int counter = 0;
+	char *path = NULL;
 
 	while (environ[counter])
 	{
 		if (_strstr(environ[counter], "PATH="))
-			return (_strcpy(NULL, environ[counter] + 5));
+		{
+			path = _strcpy(NULL, environ[counter] + 5);
+			return (path);
+		}
 		counter++;
 	}
 
 	return (NULL);
+}
+
+/**
+ * free_malloc - Free a malloc memory allocation.
+ * @pointer: variable allocated.
+ * Return: no return.
+ */
+void free_malloc(char *pointer)
+{
+	free(pointer);
 }
