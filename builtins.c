@@ -48,10 +48,8 @@ int _cd(char **arguments)
  * @arguments: command and arguments to execute.
  * Return: always 1 (interative status of the terminal).
  */
-int _help(char **arguments)
+int _help(char **arguments __attribute__((unused)))
 {
-	(void)arguments;
-
 	printf("Type program names and arguments, and hit enter.\n");
 	printf("Use the man command for information on other programs.\n");
 
@@ -68,7 +66,10 @@ int __exit(char **arguments)
 	int status = 0, i = 0;
 
 	if (arguments[1] == NULL)
+	{
+		free(arguments);
 		exit(status);
+	}
 	else
 	{
 		for (i = 0; arguments[1][i]; i++)
@@ -78,6 +79,7 @@ int __exit(char **arguments)
 		}
 
 		status = _atoi(arguments[1]);
+		free(arguments);
 		exit(status);
 	}
 
@@ -89,10 +91,9 @@ int __exit(char **arguments)
  * @arguments: command and arguments to execute.
  * Return: always 1 (interative status of the terminal).
  */
-int _env(char **arguments)
+int _env(char **arguments __attribute__((unused)))
 {
 	int counter = 0;
-	(void)arguments;
 
 	while (environ[counter])
 	{
