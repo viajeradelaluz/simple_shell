@@ -6,7 +6,7 @@ CFLAGS = -g -Wall -Werror -Wextra -pedantic
 
 # shell.c
 shell:
-	$(CC) $(CFLAGS) shell.c parse_functions.c read_functions.c execute_functions.c -o shell
+	$(CC) $(CFLAGS) shell.c parse_functions.c read_functions.c execute_functions.c builtins.c -o shell
 	valgrind -s ./shell
 	rm shell
 
