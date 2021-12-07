@@ -10,6 +10,7 @@ char *_strconcat(char *str_1, char *str_2)
 {
 	int size = _strlen(str_1) + _strlen(str_2) + 1;
 	char *temporal = NULL;
+
 	char *copy = malloc(sizeof(char *) * size);
 
 	if (!copy)
@@ -73,14 +74,4 @@ char *_getPATH(void)
 	}
 
 	return (NULL);
-}
-
-/**
- * free_malloc - Free a malloc memory allocation.
- * @pointer: variable allocated.
- * Return: no return.
- */
-void free_malloc(char *pointer)
-{
-	free(pointer);
 }
