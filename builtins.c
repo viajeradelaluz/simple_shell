@@ -59,31 +59,25 @@ int _help(char **arguments __attribute__((unused)))
 /**
  * __exit - Builting function to execute the exit-command.
  * @arguments: command and arguments to execute.
- * Return: always 0 (end of interative status of the terminal).
+ * Return: status or 0 on interative terminal, -1 on failure.
  */
 int __exit(char **arguments)
 {
 	int status = 0, i = 0;
 
 	if (arguments[1] == NULL)
+		return (status);
+
+	for (i = 0; arguments[1][i]; i++)
 	{
-		free(arguments);
-		exit(status);
-	}
-	else
-	{
-		for (i = 0; arguments[1][i]; i++)
+		if (arguments[1][i] < 48 || arguments[1][i] > 57)
 		{
-			if (arguments[1][i] < 48 || arguments[1][i] > 57)
-				perror("No valid");
+			fprintf(stderr, "hsh: 1: exit: Illegal number: %s\n", arguments[1]);
+			return (-1);
 		}
-
-		status = _atoi(arguments[1]);
-		free(arguments);
-		exit(status);
 	}
-
-	return (0);
+	status = _atoi(arguments[1]);
+	return (status);
 }
 
 /**
