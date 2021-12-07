@@ -9,6 +9,8 @@
 #include <sys/wait.h>
 #include <sys/syscall.h>
 
+#define UNUSED(x) (void)(x)
+
 /**
  * struct to_built - Check if a hsh-command is a builting.
  * @cmd: hsh-command to evaluate.
@@ -33,17 +35,18 @@ int _atoi(char *s);
 char *_strconcat(char *str_1, char *srt_2);
 char *_strcpy(char *dest, char *src);
 char *_getPATH(void);
-void free_malloc(char *string);
+void stop(char *pointer);
 
 /* parse.c */
 char **tokenize_line(char *line);
-char **tokenize_path(void);
-char *path_cmd(char *cmd);
+char **tokenize_path(char *path);
+char *path_cmd(char *path, char *cmd);
 
 /* execute.c */
-char *read_line();
-char **parse_arguments(char *line);
+char *read_line(char *path);
+char **parse_arguments(char *path, char *line, char **argv);
 int execute(char **arguments);
+void error_message(char **argv, char **arguments);
 
 /* builtins.c */
 int(*get_builtin(char **arguments))(char **);
@@ -52,10 +55,7 @@ int _help(char **arguments);
 int __exit(char **arguments);
 int _env(char **env);
 
-char *_strtok(char *str, char *delim);
-
-/* #define UNUSED(x) (void)(x); */
-#define RAII_VARIABLE() \
+char *_strtok(char *srcString, char *delim);
+unsigned int is_delim(char c, char *delim);
 
 #endif /* MAIN_H */
-
