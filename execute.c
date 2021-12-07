@@ -2,10 +2,10 @@
 
 /**
  * read_line - Getline from stdin.
- * @void: values to analize are from stdin.
+ * @path: string with PATH (environ-variable).
  * Return: a string with the stdin-line.
  */
-char *read_line(void)
+char *read_line(char *path)
 {
 	int read = 0;
 	char *line = NULL;
@@ -18,7 +18,7 @@ char *read_line(void)
 	/* Check for EOF*/
 	if (!read || feof(stdin))
 	{
-		free(line);
+		free(line), free(path);
 		exit(EXIT_SUCCESS); /* Is EOF */
 	}
 
@@ -27,37 +27,48 @@ char *read_line(void)
 
 /**
  * parse_arguments - Define if a command is builting or no-builting.
+ * @path: string with PATH (environ-variable).
  * @line: stdin-line from prompt.
+ * @argv: arguments passed to main.
  * Return: an array of arguments (strings) ready to be executed.
  */
-char **parse_arguments(char *line)
+char **parse_arguments(char *path, char *line, char **argv)
 {
-	int (*f)(char **);
-	char *if_command = NULL;
+	int (*f)(char **), status = 1;
+	char *is_command = NULL;
 	char **arguments = tokenize_line(line);
 
+	if (arguments[0] == NULL)
+	{
+		free(arguments);
+		return (NULL);
+	}
 	/* Check if command is in PATH */
 	if (access(arguments[0], F_OK) != 0)
 	{
 		/* Check if command is a builtin */
 		f = get_builtin(arguments);
 		if (!f)
-		{
-			/* Check if command is not a builtin */
-			if_command = path_cmd(arguments[0]);
-			if (!if_command)
+		{ /* Check if command is not a builtin */
+			is_command = path_cmd(path, arguments[0]);
+			if (!is_command)
 			{
-				perror("Command not found");
-				free(arguments), free(if_command);
+				error_message(argv, arguments);
+				free(arguments), free(is_command);
 				return (NULL);
 			}
-			arguments[0] = if_command;
+			arguments[0] = is_command;
 
 			/* Execute command as no-builting */
-			execute(arguments), free(if_command);
+			execute(arguments), free(is_command);
 		}
 		else
-			f(arguments), f = NULL; /* Execute command as builting */
+		{ /* Execute command as builting */
+			status = f(arguments);
+			if (status == 0 || status > 1 ||
+				((_strcmp(arguments[0], "exit") == 0) && (status == 1)))
+				free(line), free(path), free(arguments), exit(status);
+		}
 	}
 	else
 		execute(arguments); /* Execute command in PATH */
@@ -93,4 +104,18 @@ int execute(char **arguments)
 	}
 
 	return (1);
+}
+
+/**
+ * error_message - Print errors for the status of the terminal.
+ * @argv: arguments passed to main.
+ * @arguments: command and arguments to execute.
+ * Return: no return.
+ */
+void error_message(char **argv, char **arguments)
+{
+	if (isatty(STDIN_FILENO) == 0)
+		fprintf(stderr, "%s: 1: %s: not found\n", argv[0], arguments[0]);
+	else
+		fprintf(stderr, "%s: not found\n", arguments[0]);
 }
