@@ -9,11 +9,10 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	char *line = NULL;
+	char *line = NULL, *path = NULL;
 	char **arguments = NULL;
 
-	(void)argc, (void)argv, (void)env;
-/* 	UNUSED(argc), UNUSED(argv), UNUSED(env); */
+	UNUSED(argc), UNUSED(env);
 
 	do {
 		/* Prompt */
@@ -21,12 +20,13 @@ int main(int argc, char **argv, char **env)
 			write(STDOUT_FILENO, "($) ", 4);
 
 		/* Read */
-		line = read_line();
+		path = _getPATH();
+		line = read_line(path);
 
 		/* Parse and execute */
-		arguments = parse_arguments(line);
+		arguments = parse_arguments(path, line, argv);
 
-		free(line);
+		free(line), free(path);
 		free(arguments);
 
 	} while (1);
