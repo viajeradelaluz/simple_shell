@@ -25,6 +25,7 @@ int main(int argc, char **argv, char **env)
 
 		/* Parse and execute */
 		arguments = parse_arguments(path, line, argv);
+		
 
 		free(line), free(path);
 		free(arguments);

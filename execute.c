@@ -14,14 +14,16 @@ char *read_line(char *path)
 	/* Read line */
 	fflush(stdin);
 	read = getline(&line, &size_line, stdin);
+	
 
 	/* Check for EOF*/
 	if (!read || feof(stdin))
 	{
+		
 		free(line), free(path);
 		exit(EXIT_SUCCESS); /* Is EOF */
 	}
-
+	history(line);
 	return (line);
 }
 

@@ -10,6 +10,7 @@
 #include <sys/syscall.h>
 
 #define UNUSED(x) (void)(x)
+#define BUFSIZE 1024
 
 /**
  * struct to_built - Check if a hsh-command is a builting.
@@ -48,14 +49,18 @@ char **parse_arguments(char *path, char *line, char **argv);
 int execute(char **arguments);
 void error_message(char **argv, char **arguments);
 
+
 /* builtins.c */
 int(*get_builtin(char **arguments))(char **);
 int _cd(char **arguments);
 int _help(char **arguments);
 int __exit(char **arguments);
 int _env(char **env);
+int history(char *input);
 
 char *_strtok(char *srcString, char *delim);
 unsigned int is_delim(char c, char *delim);
+
+
 
 #endif /* MAIN_H */

@@ -1,12 +1,13 @@
 
 .TH SHELL 1 "DECEMBER 9, 2021"  "Hoberton-School" "0x16"
- "1.01" "C - simple_shell - man page"
+ "1.0" "C - simple_shell - man page"
 
 .SH NAME
 .B simple_shell \- simple UNIX command interpreter made in C 
 
 .SH SYNOPSIS
-$ /hsh [options] [file]
+.PP
+($) \- [command] [options \&...]
 
 .SH DESCRIPTION
 Simple_Shell is a command language interpreter that executes commands read from the standard input.
@@ -18,7 +19,7 @@ Always returns the status of the previously executed command ( 0 if no command w
 
 .SH PATH
 
-looks in PATH env variable for executable program file location.
+Looks in PATH env variable for executable program file location.
 
 .SH 
 
