@@ -35,7 +35,7 @@ int _atoi(char *s);
 /* read.c */
 char *_strconcat(char *str_1, char *srt_2);
 char *_strcpy(char *dest, char *src);
-char *_getPATH(void);
+char *_getPATH(char **argv);
 void stop(char *pointer);
 
 /* parse.c */

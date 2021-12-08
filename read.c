@@ -55,10 +55,10 @@ char *_strcpy(char *dest, char *src)
 
 /**
  * _getPATH - Find PATH directory of a Unix-OS
- * @void: no values to evaluate.
+ * @argv: arguments passed to main.
  * Return: a string with the PATH directory.
  */
-char *_getPATH(void)
+char *_getPATH(char **argv)
 {
 	int counter = 0;
 	char *path = NULL;
@@ -73,5 +73,6 @@ char *_getPATH(void)
 		counter++;
 	}
 
+	error_message(argv, NULL);
 	return (NULL);
 }
