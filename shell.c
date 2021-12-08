@@ -20,7 +20,7 @@ int main(int argc, char **argv, char **env)
 			write(STDOUT_FILENO, "($) ", 4);
 
 		/* Read */
-		path = _getPATH(argv);
+		path = _getPATH();
 		line = read_line(path);
 
 		/* Parse and execute */
