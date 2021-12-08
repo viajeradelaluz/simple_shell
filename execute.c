@@ -22,6 +22,7 @@ char *read_line(char *path)
 		exit(EXIT_SUCCESS); /* Is EOF */
 	}
 	history(line);
+	check_comment(line);
 	return (line);
 }
 
