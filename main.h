@@ -47,8 +47,7 @@ char *path_cmd(char *path, char *cmd);
 char *read_line(char *path);
 char **parse_arguments(char *path, char *line, char **argv);
 int execute(char **arguments);
-void error_message(char **argv, char **arguments);
-
+char *error_message(char **argv, char **arguments);
 
 /* builtins.c */
 int(*get_builtin(char **arguments))(char **);
@@ -56,11 +55,8 @@ int _cd(char **arguments);
 int _help(char **arguments);
 int __exit(char **arguments);
 int _env(char **env);
+
 int history(char *input);
-
-char *_strtok(char *srcString, char *delim);
-unsigned int is_delim(char c, char *delim);
-
-
+char *_strtok(char *str, char *delim);
 
 #endif /* MAIN_H */
