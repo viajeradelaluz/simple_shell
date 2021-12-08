@@ -56,7 +56,6 @@ int _strstr(char *environ, char *path)
 	char *_path = path;
 
 	environ = env;
-	_path = path;
 
 	while (*_path != '\0' && *env == *_path)
 	{
