@@ -36,7 +36,6 @@ int _atoi(char *s);
 char *_strconcat(char *str_1, char *srt_2);
 char *_strcpy(char *dest, char *src);
 char *_getPATH(void);
-void stop(char *pointer);
 
 /* parse.c */
 char **tokenize_line(char *line);
@@ -54,7 +53,7 @@ int(*get_builtin(char **arguments))(char **);
 int _cd(char **arguments);
 int _help(char **arguments);
 int __exit(char **arguments);
-int _env(char **env);
+int _env(char **arguments);
 
 int history(char *input);
 char *_strtok(char *str, char *delim);
