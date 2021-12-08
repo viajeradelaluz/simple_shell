@@ -59,6 +59,7 @@ int history(char *input);
 char *_strtok(char *str, char *delim);
 
 void sigint_c(int signal);
+void check_comment(char *line);
 
 char *_getline();
 void hashtag_handle(char *buff);
