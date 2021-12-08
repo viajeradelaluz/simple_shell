@@ -14,12 +14,10 @@ char *read_line(char *path)
 	/* Read line */
 	fflush(stdin);
 	read = getline(&line, &size_line, stdin);
-	
 
 	/* Check for EOF*/
 	if (!read || feof(stdin))
 	{
-		
 		free(line), free(path);
 		exit(EXIT_SUCCESS); /* Is EOF */
 	}
@@ -47,22 +45,21 @@ char **parse_arguments(char *path, char *line, char **argv)
 	}
 	/* Check if command is in PATH */
 	if (access(arguments[0], F_OK) != 0)
-	{
-		/* Check if command is a builtin */
+	{ /* Check if command is a builtin */
 		f = get_builtin(arguments);
 		if (!f)
 		{ /* Check if command is not a builtin */
 			is_command = path_cmd(path, arguments[0]);
 			if (!is_command)
 			{
+				free(is_command);
 				error_message(argv, arguments);
-				free(arguments), free(is_command);
-				return (NULL);
 			}
-			arguments[0] = is_command;
-
-			/* Execute command as no-builting */
-			execute(arguments), free(is_command);
+			else
+			{ /* Execute command as no-builting */
+				arguments[0] = is_command;
+				execute(arguments), free(is_command);
+			}
 		}
 		else
 		{ /* Execute command as builting */
@@ -114,10 +111,17 @@ int execute(char **arguments)
  * @arguments: command and arguments to execute.
  * Return: no return.
  */
-void error_message(char **argv, char **arguments)
+char *error_message(char **argv, char **arguments)
 {
 	if (isatty(STDIN_FILENO) == 0)
+	{
 		fprintf(stderr, "%s: 1: %s: not found\n", argv[0], arguments[0]);
+		free(arguments);
+		exit(127);
+	}
 	else
+	{
 		fprintf(stderr, "%s: not found\n", arguments[0]);
+		return (NULL);
+	}
 }
