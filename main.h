@@ -58,4 +58,9 @@ int _env(char **arguments);
 int history(char *input);
 char *_strtok(char *str, char *delim);
 
+void sigint_c(int signal);
+
+char *_getline();
+void hashtag_handle(char *buff);
+
 #endif /* MAIN_H */

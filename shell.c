@@ -14,6 +14,7 @@ int main(int argc, char **argv, char **env)
 
 	UNUSED(argc), UNUSED(env);
 
+	signal(SIGINT, sigint_c);
 	do {
 		/* Prompt */
 		if (isatty(STDIN_FILENO))
