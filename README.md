@@ -14,17 +14,17 @@ Compile all ```*.c``` files using GNU Compiler Collection (GCC) and run under li
 
 #### *GCC command to compile:*
 ```sh
-$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+~$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 ```
 
 #### *Run the shell in interactive mode:*
 ```sh
-$ ./hsh
+~$ ./hsh
 ```
 
 #### *Or run the shell in non-interactive mode:*
 ```sh
-$ echo "ls -l" | ./hsh
+~$ echo "ls -l" | ./hsh
 ```
 
 #### *The magic of Makefile:*
@@ -103,4 +103,3 @@ Johanna Alfonso, Cesar Molina, Felipe León.
 ## More information
 
 [Holberton School](https://www.holbertonschool.com/)
-
