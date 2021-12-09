@@ -43,7 +43,8 @@ $ ls -l
 
 
 .SH BUGS
-.
+
+A infinite loop when we make ctrl+z
 
 .SH AUTHOR
 Cesar Molina, Felipe Leon, Johanna Alfonso.
