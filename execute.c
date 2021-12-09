@@ -55,7 +55,7 @@ char **parse_arguments(char *path, char *line, char **argv)
 			if (!is_command)
 			{
 				free(is_command);
-				error_message(argv, arguments);
+				error_message(argv, arguments, line, path);
 			}
 			else
 			{ /* Execute command as no-builting */
@@ -109,21 +109,22 @@ int execute(char **arguments)
 
 /**
  * error_message - Print errors for the status of the terminal.
+ * @line: stdin-line from prompt.
+ * @path: string with PATH (environ-variable).
  * @argv: arguments passed to main.
  * @arguments: command and arguments to execute.
  * Return: no return.
  */
-char *error_message(char **argv, char **arguments)
+char *error_message(char **argv, char **arguments, char *line, char *path)
 {
 	if (isatty(STDIN_FILENO) == 0)
 	{
 		fprintf(stderr, "%s: 1: %s: not found\n", argv[0], arguments[0]);
-		free(arguments);
+		free(arguments), free(line), free(path);
 		exit(127);
 	}
 	else
-	{
 		fprintf(stderr, "%s: not found\n", arguments[0]);
-		return (NULL);
-	}
+
+	return (NULL);
 }

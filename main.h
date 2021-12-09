@@ -46,7 +46,7 @@ char *path_cmd(char *path, char *cmd);
 char *read_line(char *path);
 char **parse_arguments(char *path, char *line, char **argv);
 int execute(char **arguments);
-char *error_message(char **argv, char **arguments);
+char *error_message(char **argv, char **arguments, char *line, char *path);
 
 /* builtins.c */
 int(*get_builtin(char **arguments))(char **);
