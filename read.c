@@ -65,7 +65,7 @@ char *_getPATH(void)
 
 	while (environ[counter])
 	{
-		if (_strstr(environ[counter], "PATH="))
+		if (_strcmp(environ[counter], "PATH=") == 0)
 		{
 			path = _strcpy(NULL, environ[counter] + 6);
 			return (path);
