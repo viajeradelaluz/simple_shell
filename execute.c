@@ -19,10 +19,11 @@ char *read_line(char *path)
 	if (!read || feof(stdin))
 	{
 		free(line), free(path);
-		exit(2); /* Is EOF */
+		exit(0); /* Is EOF */
 	}
 	history(line);
 	check_comment(line);
+
 	return (line);
 }
 

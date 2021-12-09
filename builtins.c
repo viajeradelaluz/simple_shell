@@ -66,7 +66,7 @@ int __exit(char **arguments)
 	int status = 0, i = 0;
 
 	if (arguments[1] == NULL)
-		return (status);
+		return (2);
 
 	for (i = 0; arguments[1][i]; i++)
 	{
