@@ -67,7 +67,7 @@ char *_getPATH(void)
 	{
 		if (_strstr(environ[counter], "PATH="))
 		{
-			path = _strcpy(NULL, environ[counter] + 5);
+			path = _strcpy(NULL, environ[counter] + 6);
 			return (path);
 		}
 		counter++;
