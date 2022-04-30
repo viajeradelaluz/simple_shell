@@ -1,4 +1,10 @@
-# Simple shell
+<br>
+
+<h1 align='center'>Simple shell</h1>
+
+<p align='center'><img src='https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white'><img src='https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black'><img src='https://img.shields.io/badge/GNU%20Bash-4EAA25?style=for-the-badge&logo=GNU%20Bash&logoColor=white'></p>
+
+<br>
 
 This project is an implementation of a simple UNIX command line interpreter. It includes the basic functionality of the stantard functions and system calls, in the tradition of the first shell written by Ken Thompson.
 
