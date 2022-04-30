@@ -1,10 +1,6 @@
 <br>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-</style>
-
-<h1 align='center'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/1200px-Bash_Logo_Colored.svg.png' width='120'><br><span style="font-family: 'Roboto Slab', serif; font-size: 48px;"><strong>hsh</strong></span><br><span style="font-family: 'Roboto Slab', serif; font-size: 26px;">A simple shell implementation</span></h1>
+<h1 align='center'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/1200px-Bash_Logo_Colored.svg.png' width='120'><br><span style="font-size: 48px;"><strong>hsh</strong></span><br><span style="font-size: 26px;">A simple shell implementation</span></h1>
 
 <p align='center'><img src='https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black'><img src='https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white'><img src='https://img.shields.io/badge/GNU%20Bash-4EAA25?style=for-the-badge&logo=GNU%20Bash&logoColor=white'></p>
 
